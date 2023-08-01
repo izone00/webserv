@@ -1,41 +1,49 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: eunjilee <marvin@42.fr>                    +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/02/16 15:25:35 by eunjilee          #+#    #+#              #
-#    Updated: 2023/02/16 15:44:41 by eunjilee         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
 
-NAME = webserv
+NAME		= webserv
 
-CXX = c++
-#CXXFLAGS = -Wall -Wextra -Werror
+CXXFLAGS	= -Wall -Wextra -Werror \
+				-std=c++98 -MMD -MP
+CPPFLAGS	= -I ./include
 
-HTTP = 	HttpMessage.cpp \
-		HttpRequestMessage.cpp \
-		HttpResponseMessage.cpp \
-		HttpResponseBuilder.cpp \
-		Utils.cpp \
-		main.cpp \
-		
-SRCS = $(addprefix srcs/, $(HTTP))
-OBJS = $(SRCS:%.cpp=%.o)
+RM			= rm -rf
+
+FILENAME	=	\
+				main \
+				DerivTree \
+
+SRCS_DIR	=	srcs
+SRCS		=	$(addprefix $(SRCS_DIR)/, $(addsuffix .cpp, $(FILENAME)))
+
+OBJS_DIR	=	objs
+OBJS		=	$(addprefix $(OBJS_DIR)/, $(addsuffix .o, $(FILENAME)))
+
+DEPS		=	$(addsuffix .d, $(FILENAME))
+
+.PHONY: all clean fclean re
 
 all: $(NAME)
 
-.c.o :
-		$(CXX) $(CXXFLAGS) -c -o $(<:.cpp=.o) $<
+-include $(DEPS)
 
 $(NAME): $(OBJS)
-		$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
-clean:
-		rm -f $(OBJS)
-fclean: clean
-		rm -f $(NAME)
-re: fclean all
+	@$(CXX) $^ $(OUTPUT_OPTION)
+	@echo "\033[32mComplete✅"
 
-.PHONY: all clean fclean re .c.o
+$(OBJS_DIR):
+	@mkdir $(OBJS_DIR)
+
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.cpp $(OBJS_DIR)
+	@$(COMPILE.cpp) $< $(OUTPUT_OPTION)
+
+clean:
+	@$(RM) $(OBJS_DIR)
+	@echo "\033[31mClean🧽"
+
+fclean:
+	@$(RM) $(OBJS_DIR) $(NAME)
+	@echo "\033[31mfclean🧼"
+
+re:
+	@make fclean
+	@make all
+
