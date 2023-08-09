@@ -91,7 +91,7 @@ const string & LocationConfig::getType( const string & scriptName ) const
 
 	size_t dotIdx = scriptName.find_last_of('.');
 
-	if (dotIdx != string::npos)
+	if (dotIdx != string::npos && dotIdx != scriptName.size() - 1)
 	{
 		string extension = scriptName.substr(dotIdx + 1);
 
