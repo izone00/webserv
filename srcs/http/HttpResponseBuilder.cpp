@@ -17,6 +17,7 @@ void HttpResponseBuilder::initiate(const string & request)
 {
     clear();
     requestMessage = new HttpRequestMessage(request);
+	
     responseMessage = new HttpResponseMessage();
     if (this->requestMessage->getChunkedFlag()) {
         requestBody = this->requestMessage->getBody();
@@ -167,7 +168,6 @@ void HttpResponseBuilder::clear()
     delete responseMessage;
     delete requestMessage;
     webservValues->clear();
-    server = 0;
     resourcePath = "";
     requestBody = "";
     needMoreMessageFlag = false;

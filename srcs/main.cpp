@@ -17,6 +17,7 @@ int main(void)
 	}
 	catch(const std::exception& e)
 	{
+		cout << e.what() << endl;
 		std::cerr << errno << ": " << strerror(errno) << '\n';
 	}
 	return 0;

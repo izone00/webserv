@@ -274,8 +274,8 @@ public:
 
         if (deriv.arg[1] == "on")
             isCgi = true;
-
-        isCgi = false;
+		else
+        	isCgi = false;
     }
 
     virtual void checkSyntax( const Derivative & deriv, const vector<Derivative> * subDerivs )
@@ -306,7 +306,7 @@ public:
     {
         for (int i = 0; i < subDerivs->size(); i++)
         {
-            if (subDerivs[i].size() != 2)
+            if ((*subDerivs)[i].arg.size() != 2)
                 throw syntax_error("cgi_params");
         }
     }

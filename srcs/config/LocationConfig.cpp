@@ -85,12 +85,15 @@ const vector<string> & LocationConfig::getIndexes( void ) const
 const string & LocationConfig::getType( const string & scriptName ) const
 {
 	static const string defaultType = "text/html";// 나중에 defaultType모듈로 변경
+	
+	if (typesMod == NULL)
+		return defaultType;
 
 	size_t dotIdx = scriptName.find_last_of('.');
 
 	if (dotIdx != string::npos)
 	{
-		string extension = scriptName.substr(dotIdx);
+		string extension = scriptName.substr(dotIdx + 1);
 
 		map<string, string>::const_iterator it = typesMod->getTypesMap().find(extension);
 
