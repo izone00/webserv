@@ -4,7 +4,6 @@ HttpRequestMessage::HttpRequestMessage(const string &requestMessage)
 {
     chunkedFlag = false;
     parseRequestMessage(requestMessage);
-
 }
 
 // <경로>;<파라미터>?<질의>#<프래그먼트> 경로조각은 없다고 가정

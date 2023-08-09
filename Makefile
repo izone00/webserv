@@ -23,7 +23,6 @@ HTTP		:=	\
 				HttpResponseBuilder \
 				Utils \
 				DefaultMethodExecutor \
-				ExtendedResponseHeaderAdder \
 				ResponseHeaderAdder \
 				CgiMethodExecutor 
 

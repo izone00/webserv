@@ -11,6 +11,7 @@ class WebservValues
 {
     private:
         map<string, string> envList;
+		map<string, string> addressValues;
     public:
         string getValue(const string &key) const;
         string convert(const string &input) const;

@@ -43,5 +43,13 @@ string WebservValues::convert(const string &input) const
 
 void WebservValues::clear()
 {
-    envList.clear();
+    // envList.clear();
+	// envList = addressValues;
+
+	/*ㅈㅔ오ㅣ 변변수수들들
+	webVal.insert("server_addr", server->getIP());
+	webVal.insert("server_port", server->getPort());
+	webVal.insert("remote_addr", inet_ntoa(addr.sin_addr));
+	webVal.insert("remote_port", addr.sin_port);
+	*/
 }
